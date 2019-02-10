@@ -3,8 +3,13 @@ import { baseUrl } from '../shared/baseUrl';
 
 export const postArticle = (article) => (dispatch) => {
     
+    const bearer = 'bearer ' + localStorage.getItem('token');
+
     return fetch(baseUrl + 'articles', {
         method: 'POST',
+        headers: {
+            'Authorization': bearer
+        },
         body: article
     })
         .then(response => {
@@ -28,9 +33,14 @@ export const postArticle = (article) => (dispatch) => {
 }
 
 export const putArticle = (id, article) => (dispatch) => {
-    
+
+    const bearer = 'bearer ' + localStorage.getItem('token');
+
     return fetch(baseUrl + 'articles/' + id, {
         method: 'PUT',
+        headers: {
+            'Authorization': bearer
+        },
         body: article
     })
         .then(response => {
@@ -55,8 +65,13 @@ export const putArticle = (id, article) => (dispatch) => {
 }
 
 export const deleteArticle = (id) => (dispatch) => {
+    const bearer = 'bearer ' + localStorage.getItem('token');
+
     return fetch(baseUrl + 'articles/' + id, {
-        method: 'DELETE'
+        method: 'DELETE',
+        headers: {
+            'Authorization': bearer
+        },
     })
         .then(response => {
             if (response.ok){

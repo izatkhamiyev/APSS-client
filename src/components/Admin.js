@@ -7,18 +7,23 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { deleteArticle } from '../redux/ActionCreators';
 import TinyEditorComponent from './TinyEditor';
+import Header from './Header';
+import Footer from './Footer';
+import { logoutAdmin } from '../redux/ActionAuth';
+
 
 const mapDispatchToProps = (dispatch) => ({
-    deleteArticle: (id) => dispatch(deleteArticle(id)),
+  deleteArticle: (id) => dispatch(deleteArticle(id)),
+  logoutAdmin: () => dispatch(logoutAdmin())
 });
 
 const RenderItems = (props) => {
 
   const handleDelete = (id) => {
     var message = "Are you sure?\nArticle will be deleted";
-    if(window.confirm(message))
+    if (window.confirm(message))
       props.deleteArticle(id);
-    
+
   }
   if (props.articles.isLoading) {
     return (
@@ -78,16 +83,18 @@ class Admin extends Component {
   }
 
   changeState = () => {
-    this.setState({isPosting: !this.state.isPosting});
+    this.setState({ isPosting: !this.state.isPosting });
   }
 
-  updateArticle = (article) =>{
-    this.setState({isPosting:true ,isUpdating: article});
+  updateArticle = (article) => {
+    this.setState({ isPosting: true, isUpdating: article });
   }
   render() {
     return (
-      this.state.isPosting ?
-        <TinyEditorComponent articles={this.props.articles} article={this.state.isUpdating}  />
+      <React.Fragment>
+        <Header logoutPage={true} logoutAdmin={this.props.logoutAdmin}/>
+        {this.state.isPosting ?
+        <TinyEditorComponent articles={this.props.articles} article={this.state.isUpdating} />
         :
         <div className='container'>
           <div className='row'>
@@ -96,11 +103,13 @@ class Admin extends Component {
           <div className='row'>
             <div className="col-12">
               <Media list>
-                <RenderItems articles={this.props.articles} updateArticle={this.updateArticle} deleteArticle={this.props.deleteArticle}/>
+                <RenderItems articles={this.props.articles} updateArticle={this.updateArticle} deleteArticle={this.props.deleteArticle} />
               </Media>
             </div>
           </div>
-        </div>
+        </div>}
+        <Footer />
+      </React.Fragment>
     );
   }
 }

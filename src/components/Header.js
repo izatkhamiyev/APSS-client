@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, Button } from 'reactstrap';
+import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, Button} from 'reactstrap';
 import { NavLink } from 'react-router-dom';
 
 class Header extends Component {
@@ -40,6 +40,15 @@ class Header extends Component {
                             <NavItem className="nav-item">
                                 <NavLink className='nav-link' to='/about'>About</NavLink>
                             </NavItem>
+                            {
+                                this.props.logoutPage ?
+                                <NavItem className="nav-item ml-auto">
+                                    <Button outline color="primary" className='nav-link' onClick={this.props.logoutAdmin}>Logout</Button>
+                                </NavItem>
+                                :
+                                null
+
+                            }
                         </Nav>
                     </Collapse>
                 </div>

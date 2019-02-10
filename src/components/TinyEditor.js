@@ -60,10 +60,8 @@ class TinyEditorComponent extends Component {
         formData.append('featured', this.state.featured);
         formData.append('description', this.state.description);
         formData.append('content', this.state.content);
-        for (var pair of formData.entries()) {
-            console.log(pair[0]+ ', ' + pair[1]); 
-        }
-         if (this.state.update) {
+
+        if (this.state.update) {
             this.props.putArticle(this.state._id, formData);
         } else {
             this.props.postArticle(formData);
@@ -74,7 +72,7 @@ class TinyEditorComponent extends Component {
         const target = event.target;
         var value = target.type === 'checkbox' ? target.checked : target.value;
         const name = target.name;
-        if(name === 'imageFile')
+        if (name === 'imageFile')
             value = target.files[0];
         this.setState({
             [name]: value

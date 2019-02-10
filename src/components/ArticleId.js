@@ -5,6 +5,8 @@ import {
     CardTitle, CardSubtitle, Button
 } from 'reactstrap';
 import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'react-html-parser';
+import Header from './Header';
+import Footer from './Footer';
 
 const ArticleId = (props) => {
     if (props.isLoading) {
@@ -27,13 +29,17 @@ const ArticleId = (props) => {
     }
     else if (props.article != null)
         return (
-            <div className="container">
-                <div className="col-12 offset-md-2 col-md-8">
-                    <div><h1>{props.article.title}</h1></div>
-                    <div><img src={props.article.image} alt={props.article.title}></img></div>
-                    <div>{ReactHtmlParser(props.article.content)}</div>
+            <React.Fragment>
+                <Header />
+                <div className="container">
+                    <div className="col-12 offset-md-2 col-md-8">
+                        <div><h1>{props.article.title}</h1></div>
+                        <div><img src={props.article.image} alt={props.article.title}></img></div>
+                        <div>{ReactHtmlParser(props.article.content)}</div>
+                    </div>
                 </div>
-            </div>
+                <Footer />
+            </React.Fragment>
         );
 }
 
