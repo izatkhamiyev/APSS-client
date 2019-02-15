@@ -7,40 +7,27 @@ class Footer extends Component {
         return (
             <div className="footer">
                 <div className="container">
-                    <div className="row">
-                        <div className="col-12 col-md-1">
+                    <div className="row mt-3">
+                        <div className="col-12 col-md-3">
                             <div className="row justify-content-center">
                                 <h3 className='footer-text'>APSS</h3>
                             </div>
                         </div>
-                        <div className="col-6 col-md-3">
-                            <ul className="list-unstyled">
-                                <li><Link className="nav-link footer-link" to="/home">Home</Link></li>
-                                <li><Link className="nav-link footer-link" to="/about">About</Link></li>
-                                <li><Link className="nav-link footer-link" to="/contact">Contact</Link></li>
-                            </ul>
-                        </div>
-                        <div className="col-6 col-md-3">
-                            <ul className="list-unstyled">
-                                <li><Link className="nav-link footer-link" to="/home">Home</Link></li>
-                                <li><Link className="nav-link footer-link" to="/about">About</Link></li>
-                                <li><Link className="nav-link footer-link" to="/contact">Contact</Link></li>
-                            </ul>
+                        <div className="col-12 col-md-6">
+                            <h3 style={{color:'black'}}>
+                                Who we Are ?
+                            </h3>
+                            <p>I came back to the University of Montreal and I wasn’t sure about what I should be doing. I worked at the university as a program manager of International Studies. I was an undergrad, then a graduate student, then an admin, and later I would become a postdoc at the same university (laughs).</p>
                         </div>
                     </div>
                     <div className="row justify-content-center">
-                        <div className="col-auto col-md-4 social">
-                            <div className="text-center">
-                                <h4 className='footer-text'>Follow us</h4>
-                            </div>
-                            <div className="text-center">
-                                <a className="btn btn-social-icon btn-facebook social-item" href="http://www.facebook.com/profile.php?id="><i className="fa fa-facebook"></i></a>
-                                <a className="btn btn-social-icon btn-google social-item" href="http://www.linkedin.com/in/"><i className="fa fa-instagram "></i></a>
-                                <a className="btn btn-social-icon btn-vk social-item" href="http://www.linkedin.com/in/"><i className="fa fa-vk "></i></a>
-                            </div>
+                        <div className="">
+                            <a className="social-item" href="http://www.facebook.com/profile.php?id="><i className="fa fa-facebook"></i></a>
+                            <a className="social-item" href="http://www.linkedin.com/in/"><i className="fa fa-instagram "></i></a>
+                            <a className="social-item" href="http://www.linkedin.com/in/"><i className="fa fa-vk "></i></a>
                         </div>
                     </div>
-                    <div className="row justify-content-center">
+                    <div className="row justify-content-center mt-3">
                         <div className="col-auto">
                             <p className='footer-text'>© Copyright 2019 APSS</p>
                         </div>

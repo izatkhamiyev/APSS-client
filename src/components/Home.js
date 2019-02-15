@@ -33,9 +33,9 @@ class Home extends Component {
         });
 
         return (
-            <div>
+            <React.Fragment>
                 <Header />
-                <div id="main">
+                <div id="homeImg">
                     <div>
                         <h1>See our new articles</h1>
                         <Link to='/articles' className='btn'>Articles</Link>
@@ -47,7 +47,7 @@ class Home extends Component {
                     </div>
                 </div>
                 <Footer />
-            </div >
+            </React.Fragment>
         );
     }
 }

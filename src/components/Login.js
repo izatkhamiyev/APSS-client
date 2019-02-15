@@ -26,9 +26,6 @@ class Login extends Component {
 
     handleLogin = (event) => {
         this.props.loginAdmin({ username: this.state.username, password: this.state.password });
-        setTimeout(() => {
-            this.props.logoutAdmin()
-        }, 3600 * 3 * 1000);
         event.preventDefault();
     }
 

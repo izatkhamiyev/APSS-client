@@ -22,39 +22,51 @@ class Header extends Component {
 
     render() {
         return (
-            <header className="header">
-                <Navbar dark expand='md'>
+            <>
+                <div className='logo'>
+                    <h1>APSS</h1>
+                </div>
+                <div className='line'>
+
+                </div>
+                <Navbar light expand='md' sticky='top'>
                     <div className='container'>
-                        <NavbarBrand className='' href='/ '>APSS</NavbarBrand>
                         <NavbarToggler onClick={this.toggle} />
                         <Collapse isOpen={this.state.isNavOpen} navbar>
-                            <Nav style={{ flex: 1 }} navbar className="col-12 col-md-8 justify-content-center">
+                            <Nav style={{ flex: 1 }} navbar className="col-12 col-md-12 justify-content-center">
                                 <NavItem className="nav-item">
                                     <NavLink className='nav-link' to='/home'>Home</NavLink>
                                 </NavItem>
                                 <NavItem className="nav-item">
-                                    <NavLink className='nav-link' to='/articles'>Articles</NavLink>
+                                    <NavLink className='nav-link' to='/contact'>Events</NavLink>
                                 </NavItem>
                                 <NavItem className="nav-item">
-                                    <NavLink className='nav-link' to='/contact'>Contact us</NavLink>
+                                    <NavLink className='nav-link' to='/about'>Kazakhstan</NavLink>
                                 </NavItem>
                                 <NavItem className="nav-item">
-                                    <NavLink className='nav-link' to='/about'>About</NavLink>
+                                    <NavLink className='nav-link' to='/about'>Analysis</NavLink>
                                 </NavItem>
+                                <NavItem className="nav-item">
+                                    <NavLink className='nav-link' to='/about'>Numbers</NavLink>
+                                </NavItem>
+                                <NavItem className="nav-item">
+                                    <NavLink className='nav-link' to='/about'>Our Selection</NavLink>
+                                </NavItem>
+                            </Nav>
+                            <Nav className='ml-auto'>
                                 {
                                     this.props.logoutPage ?
                                         <NavItem className="nav-item ml-auto">
-                                            <Button outline color="primary" className='nav-link' onClick={this.props.logoutAdmin}>Logout</Button>
+                                            <a className='btn nav-link' onClick={this.props.logoutAdmin}>Logout</a>
                                         </NavItem>
                                         :
                                         null
-
                                 }
                             </Nav>
                         </Collapse>
                     </div>
                 </Navbar>
-            </header>
+             </>
         );
     }
 }

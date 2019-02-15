@@ -10,6 +10,8 @@ import TinyEditorComponent from './TinyEditor';
 import Header from './Header';
 import Footer from './Footer';
 import { logoutAdmin } from '../redux/ActionAuth';
+import { withRouter } from 'react-router-dom';
+import jwt_decode from 'jwt-decode';
 
 
 const mapDispatchToProps = (dispatch) => ({
@@ -69,6 +71,7 @@ const RenderItems = (props) => {
   }
 }
 
+const CHECK_INTERVAL = 15000 // in ms
 class Admin extends Component {
 
   constructor(props) {
@@ -80,8 +83,30 @@ class Admin extends Component {
     }
     this.changeState = this.changeState.bind(this);
     this.updateArticle = this.updateArticle.bind(this);
+    this.logout = this.logout.bind(this);
+    this.initInterval();
   }
 
+  logout = () => {
+    this.props.logoutAdmin();
+    this.props.history.push('/home');
+  }
+
+  initInterval() {
+    setInterval(() => {
+    this.check();
+    }, CHECK_INTERVAL);
+  }
+ 
+  check() {    
+    const now = new Date().getTime();
+    const timeleft = jwt_decode(localStorage.getItem('token')).exp*1000 - now;
+    if (timeleft < 0) {
+      alert('Your session is expired'); // Call here logout function, expire session
+      this.props.logoutAdmin();
+    }
+  }
+ 
   changeState = () => {
     this.setState({ isPosting: !this.state.isPosting });
   }
@@ -92,7 +117,7 @@ class Admin extends Component {
   render() {
     return (
       <React.Fragment>
-        <Header logoutPage={true} logoutAdmin={this.props.logoutAdmin}/>
+        <Header logoutPage={true} logoutAdmin={this.logout}/>
         {this.state.isPosting ?
         <TinyEditorComponent articles={this.props.articles} article={this.state.isUpdating} />
         :
@@ -114,4 +139,4 @@ class Admin extends Component {
   }
 }
 
-export default connect(null, mapDispatchToProps)(Admin);
+export default withRouter(connect(null, mapDispatchToProps)(Admin));
