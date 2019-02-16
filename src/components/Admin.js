@@ -71,7 +71,7 @@ const RenderItems = (props) => {
   }
 }
 
-const CHECK_INTERVAL = 15000 // in ms
+const CHECK_INTERVAL = 5000 // in ms
 class Admin extends Component {
 
   constructor(props) {
@@ -94,19 +94,32 @@ class Admin extends Component {
 
   initInterval() {
     setInterval(() => {
-    this.check();
+      this.check();
     }, CHECK_INTERVAL);
   }
- 
-  check() {    
-    const now = new Date().getTime();
-    const timeleft = jwt_decode(localStorage.getItem('token')).exp*1000 - now;
-    if (timeleft < 0) {
-      alert('Your session is expired'); // Call here logout function, expire session
-      this.props.logoutAdmin();
+
+  check() {
+    const jwtToken = localStorage.getItem("token");
+    // console.log(jwtToken);
+    // console.log(jwtToken.exp);
+    if(jwtToken !== null){
+      const jt = jwt_decode(jwtToken);
+      const now = new Date().getTime();
+      const timeleft = jt.exp * 1000 - now;
+      console.log(timeleft);
+      if (timeleft < 0) {
+        alert('Your session is expired'); // Call here logout function, expire session
+        this.props.logoutAdmin();
+      }
     }
+    else if(localStorage.getItem('token') !==null ){
+      alert('Your session is expired null'); // Call here logout function, expire session
+      this.props.logoutAdmin();
+      return;
+    }
+
   }
- 
+
   changeState = () => {
     this.setState({ isPosting: !this.state.isPosting });
   }
@@ -117,22 +130,22 @@ class Admin extends Component {
   render() {
     return (
       <React.Fragment>
-        <Header logoutPage={true} logoutAdmin={this.logout}/>
+        <Header logoutPage={true} logoutAdmin={this.logout} />
         {this.state.isPosting ?
-        <TinyEditorComponent articles={this.props.articles} article={this.state.isUpdating} />
-        :
-        <div className='container'>
-          <div className='row'>
-            <Button color='primary' className='offset-1 mt-3' onClick={this.changeState}> Post a new article</Button>
-          </div>
-          <div className='row'>
-            <div className="col-12">
-              <Media list>
-                <RenderItems articles={this.props.articles} updateArticle={this.updateArticle} deleteArticle={this.props.deleteArticle} />
-              </Media>
+          <TinyEditorComponent articles={this.props.articles} article={this.state.isUpdating} />
+          :
+          <div className='container'>
+            <div className='row'>
+              <Button color='primary' className='offset-1 mt-3' onClick={this.changeState}> Post a new article</Button>
             </div>
-          </div>
-        </div>}
+            <div className='row'>
+              <div className="col-12">
+                <Media list>
+                  <RenderItems articles={this.props.articles} updateArticle={this.updateArticle} deleteArticle={this.props.deleteArticle} />
+                </Media>
+              </div>
+            </div>
+          </div>}
         <Footer />
       </React.Fragment>
     );

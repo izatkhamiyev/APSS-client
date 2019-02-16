@@ -46,7 +46,8 @@ export const loginAdmin = (creds) => (dispatch) => {
     .then(response => response.json())
     .then(response => {
         if(response.success){
-            localStorage.setItem('token', response.token);
+            console.log(response.token.exp);
+            localStorage.setItem('token', JSON.stringify(response.token));
             localStorage.setItem('creds', JSON.stringify(creds));
             dispatch(recieveLogin(response.token));
         }else{

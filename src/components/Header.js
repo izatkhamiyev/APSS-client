@@ -23,13 +23,12 @@ class Header extends Component {
     render() {
         return (
             <>
-                <div className='logo'>
-                    <h1>APSS</h1>
+                <div className='logo m-1'>
+                    <h1><NavLink to='/home' className='nav-link'> APSS</NavLink></h1>
                 </div>
-                <div className='line'>
-
+                <div className='line m-1'>
                 </div>
-                <Navbar light expand='md' sticky='top'>
+                <Navbar light expand='md' sticky='top' className='m-1'>
                     <div className='container'>
                         <NavbarToggler onClick={this.toggle} />
                         <Collapse isOpen={this.state.isNavOpen} navbar>
